@@ -11,3 +11,96 @@ generator client {
   provider = "prisma-client-js"
   // previewFeatures = ["referentialActions"]
 }
+
+enum Role {
+  guest
+  user
+  admin
+}
+
+enum Type {
+  coffee
+  drink
+  frostino 
+  food 
+  snack
+  pastries
+}
+
+enum Milk {
+  cow
+  oat
+  almond
+  coconut
+  soy
+}
+
+enum Syrup {
+  cinnamon
+  maple
+  vanilla
+  chai
+}
+
+model User {
+  id                    Int                @id @default(autoincrement())
+  email                 String             @unique
+  password              String 
+  role                  Role               @default(user)
+  order                 Order[]
+}
+
+model Diet {
+  id                   Int                @id @default(autoincrement())
+  name                 String
+  product              DietsOnProduct[]
+}
+
+  // vegetarian           1
+  // vegan                2
+  // glutenFree           3
+  // dairyFree            4
+  // nutFree              5
+  // soyaFree             6
+
+model DietsOnProduct {
+  id                   Int                @id @default(autoincrement())
+  product              Product            @relation(fields: [productId], references: [id])
+  productId            Int
+  diet                 Diet               @relation(fields: [dietId], references: [id])
+  dietId               Int
+}
+
+model Product {
+  id                    Int                @id @default(autoincrement())
+  type                  Type
+  name                  String
+  description           String
+  imageUrl              String
+  price                 Float
+  syrup                 Syrup?  
+  milk                  Milk?              @default(cow)
+  diet                  DietsOnProduct[]  
+  orders                ProductsOnOrders[]
+}
+
+model ProductsOnOrders {
+  id                    Int                @id @default(autoincrement())
+  product               Product            @relation(fields: [productId], references: [id])
+  productId             Int
+  order                 Order              @relation(fields: [orderId], references: [id])
+  orderId               Int
+}
+
+model Order {
+  id                    Int                @id @default(autoincrement())
+  products              ProductsOnOrders[]
+  city                  String
+  postCode              String
+  road                  String
+
+  user                  User @relation(fields: [userId], references: [id])
+  userId                Int 
+}
+
+

@@ -1,7 +1,6 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
-
 const cors = require('cors')
 
 const app = express()
@@ -11,10 +10,13 @@ const app = express()
 // const loginAuth = require("./middleware/login");
 
 // MIDDLEWARES
-app.use(morgan('dev'))
-app.use(express.json())
-app.use(cookieParser())
+app.disable('x-powered-by')
+
 app.use(cors({ origin: 'http://localhost:3000', credentials: true })) // Enables the OPTIONS request check in our API
+app.use(cookieParser())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(morgan('dev'))
 
 // Auth
 // This is NOT under login protection
