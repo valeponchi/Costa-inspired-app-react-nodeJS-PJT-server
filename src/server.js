@@ -8,6 +8,7 @@ const app = express()
 // ROUTERS
 // const authRouter = require("./resources/auth/router");
 // const loginAuth = require("./middleware/login");
+const productsRouter = require('./resources/product/router')
 
 // MIDDLEWARES
 app.disable('x-powered-by')
@@ -27,6 +28,7 @@ app.use(morgan('dev'))
 // app.use(loginAuth);
 
 // ROUTES
+app.use('/products', productsRouter)
 
 app.get('*', (req, res) => {
 	res.status(404).json({ msg: 'No route is matching your request..' })

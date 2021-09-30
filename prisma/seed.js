@@ -48,7 +48,7 @@ const products = [
 		description:
 			'The Espresso is where it all begins. Its rich aroma is the heartbeat of all our coffees. We craft one simple shot of our intense roast for the most elegant of drinks.',
 		imageUrl:
-			'https://images.ctfassets.net/bgkj8k2gjlqk/29DjryG3y1hbuVRXAsaEAy/fe97df1f7f06a4258f3aaee06040b2e8/our-coffees-espresso-696x512.jpg?w=696&h=512&q=100&fm=webp',
+			'https://www.costa.co.uk/static/pim/f/3/f/7/f3f7a6ec94bf5cf0e33abe514868baf9f8b5e416_cortado_thumb.jpg',
 		price: 1.45,
 	},
 	{
